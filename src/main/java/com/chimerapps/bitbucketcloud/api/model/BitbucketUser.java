@@ -7,46 +7,49 @@ import com.google.gson.annotations.SerializedName;
  */
 public class BitbucketUser {
 
-    private String username = "";
+    @SerializedName("username")
+    private String mUsername = "";
 
-    private String website = "";
+    @SerializedName("website")
+    private String mWebsite = "";
 
     @SerializedName("display_name")
-    private String displayName = "";
+    private String mDisplayName = "";
 
     @SerializedName("account_id")
-    private String accountId = "";
+    private String mAccountId = "";
 
-    private String uuid = "";
+    @SerializedName("uuid")
+    private String mUuid = "";
 
     public String getUsername() {
-        return username;
+        return mUsername;
     }
 
     public String getWebsite() {
-        return website;
+        return mWebsite;
     }
 
     public String getDisplayName() {
-        return displayName;
+        return mDisplayName;
     }
 
     public String getAccountId() {
-        return accountId;
+        return mAccountId;
     }
 
     public String getUuid() {
-        return uuid;
+        return mUuid;
     }
 
     @Override
     public String toString() {
         return "BitbucketUser{" +
-                "username='" + username + '\'' +
-                ", website='" + website + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", accountId='" + accountId + '\'' +
-                ", uuid='" + uuid + '\'' +
+                "username='" + mUsername + '\'' +
+                ", website='" + mWebsite + '\'' +
+                ", displayName='" + mDisplayName + '\'' +
+                ", accountId='" + mAccountId + '\'' +
+                ", uuid='" + mUuid + '\'' +
                 '}';
     }
 }
