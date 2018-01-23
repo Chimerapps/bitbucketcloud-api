@@ -104,6 +104,7 @@ public class BitbucketTest {
         DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
         assertNotNull(reviewer);
         assertEquals("user", reviewer.getType());
+        System.out.println(defaultReviewers);
     }
 
     @Test
@@ -119,6 +120,7 @@ public class BitbucketTest {
         DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
         assertNotNull(reviewer);
         assertEquals("user", reviewer.getType());
+        System.out.println(defaultReviewers);
 
         List<DefaultReviewer> filteredList = defaultReviewers.getValues()
                 .stream()
