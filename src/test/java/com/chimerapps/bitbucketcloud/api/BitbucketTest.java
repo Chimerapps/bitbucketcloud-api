@@ -63,11 +63,16 @@ public class BitbucketTest {
     @Test
     public void getCreatePRApi() throws IOException {
         final String repoSlug = "android_gradle_demo";
+        final String title = "Title " + System.currentTimeMillis();
+        final String description = "Description " + System.currentTimeMillis();
 
-        final Destination source = new Destination("feature/bitbucket-integration");
-        final Destination destination = new Destination("develop");
+        final String branchNameSource = "feature/bitbucket-integration";
+        final String branchNameDestination = "develop";
 
-        final PullRequest pullRequest = new PullRequest("Title", "Description", source, destination);
+        final Destination source = new Destination(branchNameSource);
+        final Destination destination = new Destination(branchNameDestination);
+
+        final PullRequest pullRequest = new PullRequest(title, description, source, destination);
 
         final Response<PullRequest> response = mBitbucket.getApi()
                 .postPullRequest("icapps", repoSlug, pullRequest)
@@ -76,6 +81,10 @@ public class BitbucketTest {
         assertNull(response.errorBody());
         final PullRequest responsePullRequest = response.body();
         assertNotNull(responsePullRequest);
+        assertEquals(title, responsePullRequest.getTitle());
+        assertEquals(description, responsePullRequest.getDescription());
+        assertEquals(branchNameSource, responsePullRequest.getSource().getBranch().getBranchName());
+        assertEquals(branchNameDestination, responsePullRequest.getDestination().getBranch().getBranchName());
         System.out.println(responsePullRequest);
     }
 }
