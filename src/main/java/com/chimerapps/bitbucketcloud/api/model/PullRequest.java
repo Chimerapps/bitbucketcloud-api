@@ -10,16 +10,26 @@ import java.util.List;
  * @author Koen Van Looveren
  */
 public class PullRequest {
+
+    @NotNull
     @SerializedName("title")
     private final String mTitle;
+
+    @NotNull
     @SerializedName("description")
     private final String mDescription;
+
+    @NotNull
     @SerializedName("destination")
     private final Destination mDestination;
+
     @SerializedName("close_source_branch")
     private final boolean mCloseSourceBranch;
+
+    @NotNull
     @SerializedName("source")
     private final Destination mSource;
+
     @Nullable
     @SerializedName("reviewers")
     private final List<DefaultReviewer> mReviewers;
@@ -37,18 +47,22 @@ public class PullRequest {
         mCloseSourceBranch = true;
     }
 
+    @NotNull
     public String getTitle() {
         return mTitle;
     }
 
+    @NotNull
     public String getDescription() {
         return mDescription;
     }
 
+    @NotNull
     public Destination getDestination() {
         return mDestination;
     }
 
+    @NotNull
     public Destination getSource() {
         return mSource;
     }

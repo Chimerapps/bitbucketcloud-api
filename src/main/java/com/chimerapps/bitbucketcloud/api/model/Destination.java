@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Koen Van Looveren
  */
 public class Destination {
+
+    @NotNull
     @SerializedName("branch")
     private final Branch mBranch;
 
@@ -14,6 +16,7 @@ public class Destination {
         mBranch = new Branch(branchName);
     }
 
+    @NotNull
     public Branch getBranch() {
         return mBranch;
     }

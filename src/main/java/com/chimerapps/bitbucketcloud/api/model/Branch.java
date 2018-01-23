@@ -5,13 +5,15 @@ import org.jetbrains.annotations.NotNull;
 
 public class Branch {
 
+    @NotNull
     @SerializedName("name")
     private final String mName;
 
-    public Branch(@NotNull String name) {
+    Branch(@NotNull String name) {
         this.mName = name;
     }
 
+    @NotNull
     public String getBranchName() {
         return mName;
     }
