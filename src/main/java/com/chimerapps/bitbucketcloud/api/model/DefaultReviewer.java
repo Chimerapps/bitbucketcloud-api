@@ -4,38 +4,36 @@ import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author nicolaverbeeck
+ * @author Koen Van Looveren
  */
-public class BitbucketUser {
+public class DefaultReviewer {
 
     @NotNull
     @SerializedName("username")
-    private String mUsername = "";
-
-    @NotNull
-    @SerializedName("website")
-    private String mWebsite = "";
+    private final String mUsername;
 
     @NotNull
     @SerializedName("display_name")
-    private String mDisplayName = "";
+    private final String mDisplayName;
 
     @NotNull
-    @SerializedName("account_id")
-    private String mAccountId = "";
+    @SerializedName("type")
+    private final String mType;
 
     @NotNull
     @SerializedName("uuid")
-    private String mUuid = "";
+    private final String mUuid;
+
+    public DefaultReviewer(@NotNull String username, @NotNull String displayName, @NotNull String type, @NotNull String uuid) {
+        this.mUsername = username;
+        this.mDisplayName = displayName;
+        this.mType = type;
+        this.mUuid = uuid;
+    }
 
     @NotNull
     public String getUsername() {
         return mUsername;
-    }
-
-    @NotNull
-    public String getWebsite() {
-        return mWebsite;
     }
 
     @NotNull
@@ -44,8 +42,8 @@ public class BitbucketUser {
     }
 
     @NotNull
-    public String getAccountId() {
-        return mAccountId;
+    public String getType() {
+        return mType;
     }
 
     @NotNull
@@ -55,11 +53,10 @@ public class BitbucketUser {
 
     @Override
     public String toString() {
-        return "BitbucketUser{" +
+        return "DefaultReviewer{" +
                 "username='" + mUsername + '\'' +
-                ", website='" + mWebsite + '\'' +
                 ", displayName='" + mDisplayName + '\'' +
-                ", accountId='" + mAccountId + '\'' +
+                ", type='" + mType + '\'' +
                 ", uuid='" + mUuid + '\'' +
                 '}';
     }

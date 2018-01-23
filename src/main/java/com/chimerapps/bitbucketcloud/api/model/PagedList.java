@@ -1,5 +1,6 @@
 package com.chimerapps.bitbucketcloud.api.model;
 
+import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,57 +12,63 @@ import java.util.List;
  */
 public class PagedList<T> {
 
-    private int pagelen = -1;
+    @SerializedName("pagelen")
+    private int mPagelen = -1;
 
-    private int page = -1;
+    @SerializedName("page")
+    private int mPage = -1;
 
-    private int size = -1;
+    @SerializedName("size")
+    private int mSize = -1;
 
     @Nullable
-    private String next = null;
+    @SerializedName("next")
+    private String mNext = null;
 
     @Nullable
-    private String previous = null;
+    @SerializedName("previous")
+    private String mPrevious = null;
 
     @NotNull
-    private List<T> values = Collections.emptyList();
+    @SerializedName("values")
+    private List<T> mValues = Collections.emptyList();
 
     public int getPagelen() {
-        return pagelen;
+        return mPagelen;
     }
 
     public int getPage() {
-        return page;
+        return mPage;
     }
 
     public int getSize() {
-        return size;
+        return mSize;
     }
 
     @Nullable
     public String getNext() {
-        return next;
+        return mNext;
     }
 
     @Nullable
     public String getPrevious() {
-        return previous;
+        return mPrevious;
     }
 
     @NotNull
     public List<T> getValues() {
-        return values;
+        return mValues;
     }
 
     @Override
     public String toString() {
         return "PagedList{" +
-                "pagelen=" + pagelen +
-                ", page=" + page +
-                ", size=" + size +
-                ", next='" + next + '\'' +
-                ", previous='" + previous + '\'' +
-                ", values=" + values +
+                "pagelen=" + mPagelen +
+                ", page=" + mPage +
+                ", size=" + mSize +
+                ", next='" + mNext + '\'' +
+                ", previous='" + mPrevious + '\'' +
+                ", values=" + mValues +
                 '}';
     }
 }

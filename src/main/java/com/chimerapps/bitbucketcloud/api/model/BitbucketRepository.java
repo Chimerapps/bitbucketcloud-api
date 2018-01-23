@@ -9,120 +9,130 @@ import org.jetbrains.annotations.NotNull;
 public class BitbucketRepository {
 
     @NotNull
-    private String scm = "";
+    @SerializedName("scm")
+    private String mScm = "";
 
     @NotNull
-    private String website = "";
+    @SerializedName("website")
+    private String mWebsite = "";
 
     @SerializedName("has_wiki")
-    private boolean hasWiki = false;
+    private boolean mHasWiki = false;
 
     @NotNull
-    private String name = "";
+    @SerializedName("name")
+    private String mName = "";
 
     @NotNull
-    private String uuid = "";
+    @SerializedName("uuid")
+    private String mUuid = "";
 
     @NotNull
-    private String language = "";
+    @SerializedName("language")
+    private String mLanguage = "";
 
     @SerializedName("full_name")
-    private String fullName = "";
+    private String mFullName = "";
 
     @NotNull
-    private BranchInfo mainbranch = new BranchInfo();
+    @SerializedName("mainbranch")
+    private BranchInfo mMainbranch = new BranchInfo();
 
     @NotNull
-    private String slug = "";
+    @SerializedName("slug")
+    private String mSlug = "";
 
     @NotNull
-    private String description = "";
+    @SerializedName("description")
+    private String mDescription = "";
 
     @NotNull
     public String getScm() {
-        return scm;
+        return mScm;
     }
 
     @NotNull
     public String getWebsite() {
-        return website;
+        return mWebsite;
     }
 
     public boolean isHasWiki() {
-        return hasWiki;
+        return mHasWiki;
     }
 
     @NotNull
     public String getName() {
-        return name;
+        return mName;
     }
 
     @NotNull
     public String getUuid() {
-        return uuid;
+        return mUuid;
     }
 
     @NotNull
     public String getLanguage() {
-        return language;
+        return mLanguage;
     }
 
     public String getFullName() {
-        return fullName;
+        return mFullName;
     }
 
     @NotNull
     public BranchInfo getMainbranch() {
-        return mainbranch;
+        return mMainbranch;
     }
 
     @NotNull
     public String getSlug() {
-        return slug;
+        return mSlug;
     }
 
     @NotNull
     public String getDescription() {
-        return description;
+        return mDescription;
     }
 
     @Override
     public String toString() {
         return "BitbucketRepository{" +
-                "scm='" + scm + '\'' +
-                ", website='" + website + '\'' +
-                ", hasWiki=" + hasWiki +
-                ", name='" + name + '\'' +
-                ", uuid='" + uuid + '\'' +
-                ", language='" + language + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", mainbranch=" + mainbranch +
-                ", slug='" + slug + '\'' +
-                ", description='" + description + '\'' +
+                "scm='" + mScm + '\'' +
+                ", website='" + mWebsite + '\'' +
+                ", hasWiki=" + mHasWiki +
+                ", name='" + mName + '\'' +
+                ", uuid='" + mUuid + '\'' +
+                ", language='" + mLanguage + '\'' +
+                ", fullName='" + mFullName + '\'' +
+                ", mainbranch=" + mMainbranch +
+                ", slug='" + mSlug + '\'' +
+                ", description='" + mDescription + '\'' +
                 '}';
     }
 
     public static class BranchInfo {
         @NotNull
-        private String type = "";
+        @SerializedName("type")
+        private String mType = "";
         @NotNull
-        private String gname = "";
+        @SerializedName("gname")
+        private String mGname = "";
 
         @NotNull
         public String getType() {
-            return type;
+            return mType;
         }
 
         @NotNull
         public String getGname() {
-            return gname;
+            return mGname;
         }
 
         @Override
         public String toString() {
             return "BranchInfo{" +
-                    "type='" + type + '\'' +
-                    ", gname='" + gname + '\'' +
+                    "type='" + mType + '\'' +
+                    ", gname='" + mGname + '\'' +
                     '}';
         }
     }
