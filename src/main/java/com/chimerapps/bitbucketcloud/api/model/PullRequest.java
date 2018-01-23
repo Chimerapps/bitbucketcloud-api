@@ -41,4 +41,14 @@ public class PullRequest {
     public Destination getSource() {
         return mSource;
     }
+
+    @Override
+    public String toString() {
+        return "PullRequest{" +
+                "title='" + mTitle + '\'' +
+                ", description='" + mDescription + '\'' +
+                ", destination=" + mDestination +
+                ", source=" + mSource +
+                '}';
+    }
 }

@@ -17,4 +17,11 @@ public class Destination {
     public Branch getBranch() {
         return mBranch;
     }
+
+    @Override
+    public String toString() {
+        return "Destination{" +
+                "branch=" + mBranch +
+                '}';
+    }
 }

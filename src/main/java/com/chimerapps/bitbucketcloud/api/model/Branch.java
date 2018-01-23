@@ -15,4 +15,11 @@ public class Branch {
     public String getBranchName() {
         return mName;
     }
+
+    @Override
+    public String toString() {
+        return "Branch{" +
+                "name='" + mName + '\'' +
+                '}';
+    }
 }
