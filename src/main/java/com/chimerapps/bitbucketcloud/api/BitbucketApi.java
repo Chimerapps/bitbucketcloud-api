@@ -20,6 +20,10 @@ public interface BitbucketApi {
     @GET
     Call<PagedList<BitbucketRepository>> getRepositoriesPage(@Url final String pageUrl);
 
+    @GET("repositories/{user}/{repoSlug}/default-reviewers")
+    Call<PagedList<DefaultReviewer>> getDefaultReviewers(@Path("user") final String user,
+                                          @Path("repoSlug") final String repoSlug);
+
     @POST("repositories/{user}/{repoSlug}/pullrequests")
     Call<PullRequest> postPullRequest(@Path("user") final String user,
                                       @Path("repoSlug") final String repoSlug,
