@@ -1,14 +1,9 @@
 package com.chimerapps.bitbucketcloud.api;
 
-import com.chimerapps.bitbucketcloud.api.model.BitbucketRepository;
-import com.chimerapps.bitbucketcloud.api.model.BitbucketUser;
-import com.chimerapps.bitbucketcloud.api.model.PagedList;
+import com.chimerapps.bitbucketcloud.api.model.*;
 import org.jetbrains.annotations.Nullable;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
+import retrofit2.http.*;
 
 /**
  * @author nicolaverbeeck
@@ -25,4 +20,8 @@ public interface BitbucketApi {
     @GET
     Call<PagedList<BitbucketRepository>> getRepositoriesPage(@Url final String pageUrl);
 
+    @POST("repositories/{user}/{repoSlug}/pullrequests")
+    Call<PullRequest> postPullRequest(@Path("user") final String user,
+                                      @Path("repoSlug") final String repoSlug,
+                                      @Body final PullRequest pullRequest);
 }
