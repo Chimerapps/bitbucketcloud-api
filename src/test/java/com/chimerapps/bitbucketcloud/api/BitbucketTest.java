@@ -87,7 +87,8 @@ public class BitbucketTest {
         assertEquals(branchNameSource, responsePullRequest.getSource().getBranch().getBranchName());
         assertEquals(branchNameDestination, responsePullRequest.getDestination().getBranch().getBranchName());
         assertTrue(responsePullRequest.isCloseSourceBranch());
-        assertNull(responsePullRequest.getReviewers());
+        assertNotNull(responsePullRequest.getReviewers());
+        assertEquals(0, responsePullRequest.getReviewers().size());
         System.out.println(responsePullRequest);
     }
 
