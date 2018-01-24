@@ -2,6 +2,7 @@ package com.chimerapps.bitbucketcloud.api.model;
 
 import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Koen Van Looveren
@@ -12,19 +13,23 @@ public class DefaultReviewer {
     @SerializedName("username")
     private final String mUsername;
 
-    @NotNull
+    @Nullable
     @SerializedName("display_name")
     private final String mDisplayName;
 
-    @NotNull
+    @Nullable
     @SerializedName("type")
     private final String mType;
 
-    @NotNull
+    @Nullable
     @SerializedName("uuid")
     private final String mUuid;
 
-    public DefaultReviewer(@NotNull String username, @NotNull String displayName, @NotNull String type, @NotNull String uuid) {
+    public DefaultReviewer(@NotNull String username) {
+        this(username, null, null, null);
+    }
+
+    public DefaultReviewer(@NotNull String username, @Nullable String displayName, @Nullable String type, @Nullable String uuid) {
         this.mUsername = username;
         this.mDisplayName = displayName;
         this.mType = type;
@@ -36,17 +41,17 @@ public class DefaultReviewer {
         return mUsername;
     }
 
-    @NotNull
+    @Nullable
     public String getDisplayName() {
         return mDisplayName;
     }
 
-    @NotNull
+    @Nullable
     public String getType() {
         return mType;
     }
 
-    @NotNull
+    @Nullable
     public String getUuid() {
         return mUuid;
     }

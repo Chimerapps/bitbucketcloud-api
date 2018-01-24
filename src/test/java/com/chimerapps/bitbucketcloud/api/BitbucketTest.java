@@ -8,6 +8,7 @@ import org.junit.Test;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,6 +93,39 @@ public class BitbucketTest {
         System.out.println(responsePullRequest);
     }
 
+
+    @Test
+    public void getCreatePRWithHardcodedReviewersApi() throws IOException {
+        final String title = "Title " + System.currentTimeMillis();
+        final String description = "Description " + System.currentTimeMillis();
+
+        final String branchNameSource = "feature/bitbucket-integration";
+        final String branchNameDestination = "develop";
+
+        final Destination source = new Destination(branchNameSource);
+        final Destination destination = new Destination(branchNameDestination);
+
+        final List<DefaultReviewer> defaultReviewers = new ArrayList<>();
+        defaultReviewers.add(new DefaultReviewer("verbeni"));
+        final PullRequest pullRequest = new PullRequest(title, description, source, destination, defaultReviewers);
+
+        final Response<PullRequest> response = mBitbucket.getApi()
+                .postPullRequest(user, repoSlug, pullRequest)
+                .execute();
+
+        assertNull(response.errorBody());
+        final PullRequest responsePullRequest = response.body();
+        assertNotNull(responsePullRequest);
+        assertEquals(title, responsePullRequest.getTitle());
+        assertEquals(description, responsePullRequest.getDescription());
+        assertEquals(branchNameSource, responsePullRequest.getSource().getBranch().getBranchName());
+        assertEquals(branchNameDestination, responsePullRequest.getDestination().getBranch().getBranchName());
+        assertTrue(responsePullRequest.isCloseSourceBranch());
+        assertNotNull(responsePullRequest.getReviewers());
+        assertEquals(1, responsePullRequest.getReviewers().size());
+        System.out.println(responsePullRequest);
+    }
+
     @Test
     public void getDefaultReviewersApi() throws IOException {
         final Response<PagedList<DefaultReviewer>> response = mBitbucket.getApi()
@@ -101,7 +135,7 @@ public class BitbucketTest {
         final PagedList<DefaultReviewer> defaultReviewers = response.body();
         assertNotNull(defaultReviewers);
         assertEquals(2, defaultReviewers.getSize());
-        DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
+        final DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
         assertNotNull(reviewer);
         assertEquals("user", reviewer.getType());
         System.out.println(defaultReviewers);
@@ -117,12 +151,12 @@ public class BitbucketTest {
         final PagedList<DefaultReviewer> defaultReviewers = responseDefaultReviewers.body();
         assertNotNull(defaultReviewers);
         assertEquals(2, defaultReviewers.getSize());
-        DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
+        final DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
         assertNotNull(reviewer);
         assertEquals("user", reviewer.getType());
         System.out.println(defaultReviewers);
 
-        List<DefaultReviewer> filteredList = defaultReviewers.getValues()
+        final List<DefaultReviewer> filteredList = defaultReviewers.getValues()
                 .stream()
                 .filter(r -> !r.getUsername().equals(USERNAME))
                 .collect(Collectors.toList());
@@ -153,7 +187,7 @@ public class BitbucketTest {
         assertNotNull(responsePullRequest.getReviewers());
         assertEquals(1, responsePullRequest.getReviewers().size());
 
-        DefaultReviewer defaultReviewer = responsePullRequest.getReviewers().get(0);
+        final DefaultReviewer defaultReviewer = responsePullRequest.getReviewers().get(0);
         assertEquals(reviewer.getUsername(), defaultReviewer.getUsername());
         assertEquals(reviewer.getDisplayName(), defaultReviewer.getDisplayName());
         assertEquals(reviewer.getType(), defaultReviewer.getType());
