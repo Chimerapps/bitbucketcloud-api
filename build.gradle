@@ -11,7 +11,7 @@ plugins {
 }
 
 
-def artifactVersion = '0.1.0'
+def artifactVersion = '0.1.1'
 def artifactGroup = 'com.chimerapps'
 
 group "$artifactGroup"
