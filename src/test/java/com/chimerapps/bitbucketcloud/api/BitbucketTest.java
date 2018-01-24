@@ -5,10 +5,16 @@ import com.chimerapps.bitbucketcloud.api.model.filter.PropertyCompare;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.SendingContext.RunTime;
 import retrofit2.Response;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -89,6 +95,39 @@ public class BitbucketTest {
         assertTrue(responsePullRequest.isCloseSourceBranch());
         assertNotNull(responsePullRequest.getReviewers());
         assertEquals(0, responsePullRequest.getReviewers().size());
+        System.out.println(responsePullRequest);
+    }
+
+
+    @Test
+    public void getCreatePRWithHardcodedReviewersApi() throws IOException {
+        final String title = "Title " + System.currentTimeMillis();
+        final String description = "Description " + System.currentTimeMillis();
+
+        final String branchNameSource = "feature/bitbucket-integration";
+        final String branchNameDestination = "develop";
+
+        final Destination source = new Destination(branchNameSource);
+        final Destination destination = new Destination(branchNameDestination);
+
+        final List<DefaultReviewer> defaultReviewers = new ArrayList<>();
+        defaultReviewers.add(new DefaultReviewer("verbeni"));
+        final PullRequest pullRequest = new PullRequest(title, description, source, destination, defaultReviewers);
+
+        final Response<PullRequest> response = mBitbucket.getApi()
+                .postPullRequest(user, repoSlug, pullRequest)
+                .execute();
+
+        assertNull(response.errorBody());
+        final PullRequest responsePullRequest = response.body();
+        assertNotNull(responsePullRequest);
+        assertEquals(title, responsePullRequest.getTitle());
+        assertEquals(description, responsePullRequest.getDescription());
+        assertEquals(branchNameSource, responsePullRequest.getSource().getBranch().getBranchName());
+        assertEquals(branchNameDestination, responsePullRequest.getDestination().getBranch().getBranchName());
+        assertTrue(responsePullRequest.isCloseSourceBranch());
+        assertNotNull(responsePullRequest.getReviewers());
+        assertEquals(1, responsePullRequest.getReviewers().size());
         System.out.println(responsePullRequest);
     }
 
