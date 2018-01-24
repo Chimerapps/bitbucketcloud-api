@@ -140,7 +140,7 @@ public class BitbucketTest {
         final PagedList<DefaultReviewer> defaultReviewers = response.body();
         assertNotNull(defaultReviewers);
         assertEquals(2, defaultReviewers.getSize());
-        DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
+        final DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
         assertNotNull(reviewer);
         assertEquals("user", reviewer.getType());
         System.out.println(defaultReviewers);
@@ -156,12 +156,12 @@ public class BitbucketTest {
         final PagedList<DefaultReviewer> defaultReviewers = responseDefaultReviewers.body();
         assertNotNull(defaultReviewers);
         assertEquals(2, defaultReviewers.getSize());
-        DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
+        final DefaultReviewer reviewer = defaultReviewers.getValues().get(0);
         assertNotNull(reviewer);
         assertEquals("user", reviewer.getType());
         System.out.println(defaultReviewers);
 
-        List<DefaultReviewer> filteredList = defaultReviewers.getValues()
+        final List<DefaultReviewer> filteredList = defaultReviewers.getValues()
                 .stream()
                 .filter(r -> !r.getUsername().equals(USERNAME))
                 .collect(Collectors.toList());
@@ -192,7 +192,7 @@ public class BitbucketTest {
         assertNotNull(responsePullRequest.getReviewers());
         assertEquals(1, responsePullRequest.getReviewers().size());
 
-        DefaultReviewer defaultReviewer = responsePullRequest.getReviewers().get(0);
+        final DefaultReviewer defaultReviewer = responsePullRequest.getReviewers().get(0);
         assertEquals(reviewer.getUsername(), defaultReviewer.getUsername());
         assertEquals(reviewer.getDisplayName(), defaultReviewer.getDisplayName());
         assertEquals(reviewer.getType(), defaultReviewer.getType());
