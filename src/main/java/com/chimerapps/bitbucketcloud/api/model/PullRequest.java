@@ -12,6 +12,10 @@ import java.util.List;
 public class PullRequest {
 
     @NotNull
+    @SerializedName("id")
+    private final int mId;
+
+    @NotNull
     @SerializedName("title")
     private final String mTitle;
 
@@ -34,17 +38,24 @@ public class PullRequest {
     @SerializedName("reviewers")
     private final List<DefaultReviewer> mReviewers;
 
-    public PullRequest(@NotNull String title,
+    public PullRequest(@NotNull int id,
+                       @NotNull String title,
                        @NotNull String description,
                        @NotNull Destination source,
                        @NotNull Destination destination,
                        @Nullable List<DefaultReviewer> reviewers) {
+        mId = id;
         mTitle = title;
         mDescription = description;
         mSource = source;
         mDestination = destination;
         mReviewers = reviewers;
         mCloseSourceBranch = true;
+    }
+
+    @NotNull
+    public int getId() {
+        return mId;
     }
 
     @NotNull
@@ -79,12 +90,13 @@ public class PullRequest {
     @Override
     public String toString() {
         return "PullRequest{" +
-                "title='" + mTitle + '\'' +
-                ", description='" + mDescription + '\'' +
-                ", destination=" + mDestination +
-                ", source=" + mSource +
-                ", reviewers=" + mReviewers +
-                ", closeSourceBranch=" + mCloseSourceBranch +
+                "mId=" + mId +
+                ", mTitle='" + mTitle + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mDestination=" + mDestination +
+                ", mCloseSourceBranch=" + mCloseSourceBranch +
+                ", mSource=" + mSource +
+                ", mReviewers=" + mReviewers +
                 '}';
     }
 }

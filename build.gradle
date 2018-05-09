@@ -11,7 +11,7 @@ plugins {
 }
 
 
-def artifactVersion = '0.1.1'
+def artifactVersion = '0.1.2'
 def artifactGroup = 'com.chimerapps'
 
 group "$artifactGroup"
@@ -81,6 +81,11 @@ def pomConfig = {
             name "Nicola Verbeeck"
             email "nicola@chimerapps.com"
             organization "Chimerapps"
+        }
+        developer {
+            name "Koen Van Looveren"
+            email "koen.vanlooveren@icapps.com"
+            organization "icapps"
         }
     }
 }

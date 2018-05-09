@@ -68,13 +68,13 @@ public class BitbucketTest {
         final String title = "Title " + System.currentTimeMillis();
         final String description = "Description " + System.currentTimeMillis();
 
-        final String branchNameSource = "feature/bitbucket-integration";
+        final String branchNameSource = "never-delete/bitbucket-cloud-api";
         final String branchNameDestination = "develop";
 
         final Destination source = new Destination(branchNameSource);
         final Destination destination = new Destination(branchNameDestination);
 
-        final PullRequest pullRequest = new PullRequest(title, description, source, destination, null);
+        final PullRequest pullRequest = new PullRequest(0, title, description, source, destination, null);
 
         final Response<PullRequest> response = mBitbucket.getApi()
                 .postPullRequest(user, repoSlug, pullRequest)
@@ -99,7 +99,7 @@ public class BitbucketTest {
         final String title = "Title " + System.currentTimeMillis();
         final String description = "Description " + System.currentTimeMillis();
 
-        final String branchNameSource = "feature/bitbucket-integration";
+        final String branchNameSource = "never-delete/bitbucket-cloud-api";
         final String branchNameDestination = "develop";
 
         final Destination source = new Destination(branchNameSource);
@@ -107,7 +107,7 @@ public class BitbucketTest {
 
         final List<DefaultReviewer> defaultReviewers = new ArrayList<>();
         defaultReviewers.add(new DefaultReviewer("verbeni"));
-        final PullRequest pullRequest = new PullRequest(title, description, source, destination, defaultReviewers);
+        final PullRequest pullRequest = new PullRequest(0, title, description, source, destination, defaultReviewers);
 
         final Response<PullRequest> response = mBitbucket.getApi()
                 .postPullRequest(user, repoSlug, pullRequest)
@@ -165,13 +165,13 @@ public class BitbucketTest {
         final String title = "Title " + System.currentTimeMillis();
         final String description = "Description " + System.currentTimeMillis();
 
-        final String branchNameSource = "feature/bitbucket-integration";
+        final String branchNameSource = "never-delete/bitbucket-cloud-api";
         final String branchNameDestination = "develop";
 
         final Destination source = new Destination(branchNameSource);
         final Destination destination = new Destination(branchNameDestination);
 
-        final PullRequest pullRequest = new PullRequest(title, description, source, destination, filteredList);
+        final PullRequest pullRequest = new PullRequest(0, title, description, source, destination, filteredList);
 
         final Response<PullRequest> responsePr = mBitbucket.getApi()
                 .postPullRequest(user, repoSlug, pullRequest)
