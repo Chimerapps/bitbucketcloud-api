@@ -82,6 +82,11 @@ def pomConfig = {
             email "nicola@chimerapps.com"
             organization "Chimerapps"
         }
+        developer {
+            name "Koen Van Looveren"
+            email "koen.vanlooveren@icapps.com"
+            organization "icapps"
+        }
     }
 }
 
