@@ -29,10 +29,6 @@ if (secretPropsFile.exists()) {
     ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
 }
 
-java {
-    withSourcesJar()
-}
-
 publishing {
     publications {
         release(MavenPublication) {
@@ -41,6 +37,11 @@ publishing {
             version "$artifactVersion"
 
             from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+            artifact javadocJar
 
             pom {
                 name = artifactName
