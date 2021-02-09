@@ -6,33 +6,11 @@ buildscript {
 
     }
 }
-plugins {
-    id "com.jfrog.bintray" version "1.7.3"
-}
-
-
-def artifactVersion = '0.1.2'
-def artifactGroup = 'com.chimerapps'
-
-group "$artifactGroup"
-version "$artifactVersion"
 
 apply plugin: 'java'
-apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-
-task sourceJar(type: Jar, dependsOn: classes) {
-    classifier 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
 
 repositories {
     mavenCentral()
@@ -50,66 +28,11 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    pkg {
-        repo = 'maven'
-        name = 'bitbucketcloud-api'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/Chimerapps/bitbucketcloud-api'
-
-        version {
-            name = "$artifactVersion"
-            desc = "Java library for interfacing with the bitbucket cloud api"
-            released = new Date()
-        }
-    }
-    publications = ['maven']
+ext {
+    artifactVersion = '0.1.2'
+    artifactName = 'bitbucketcloud-api'
+    artifactGroup = 'com.chimerapps'
+    artifactDescription = 'Java library for interfacing with the bitbucket cloud api'
 }
 
-def pomConfig = {
-    licenses {
-        license {
-            name "The Apache Software License, Version 2.0"
-            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-            distribution "repo"
-        }
-    }
-    developers {
-        developer {
-            name "Nicola Verbeeck"
-            email "nicola@chimerapps.com"
-            organization "Chimerapps"
-        }
-        developer {
-            name "Koen Van Looveren"
-            email "koen.vanlooveren@icapps.com"
-            organization "icapps"
-        }
-    }
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId "$artifactGroup"
-            artifactId 'bitbucketcloud-api'
-            version "$artifactVersion"
-
-            from components.java
-
-            artifact sourceJar
-            artifact javadocJar
-
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('description', 'Java library for interfacing with the bitbucket cloud api')
-                root.appendNode('name', 'bitbucketcloud-api')
-                root.appendNode('url', 'https://github.com/Chimerapps/bitbucketcloud-api')
-                root.children().last() + pomConfig
-            }
-        }
-    }
-}
-
+apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
